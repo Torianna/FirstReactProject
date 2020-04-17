@@ -1,24 +1,11 @@
 import React, { Component } from 'react'; //zaciagamy główną klase reactową którą będziemy rozszerzac
 import './App.css';
 import Article from './Article/Article';
-import styled from 'styled-components';
+import styles from './App.module.css';
 
-//styled components - normalny css
-const StyledButton = styled.button`
-background-color: white;
-border: ${props=> props.altButton ? '2px solid red' : '2px solid #326647'}; //warunek w styled divie, który przekazujemy przez propsy
-color: black;
-padding: 10px 16px;
-text-align: center;
-font-size: 20px;
-cursor: pointer;
-margin-top: 10px;
-margin-bottom: 10px;
-transitionDuration: 0.4s;
-&:hover{
-  background-color: ${props => props.altButton ? 'red' : '#326647' };
-  color: white;
-}`
+// //styled components - normalny css
+// const StyledButton = styled.button`
+// `
 
 
 class App extends Component {
@@ -53,6 +40,7 @@ class App extends Component {
 
   render() //obligatoryjna funkcja
   {
+    const buttonStyles=[styles.toggleButton];
 
     // //inline styles 
     // const buttonStyle = {
@@ -93,6 +81,8 @@ class App extends Component {
       //   backgroundColor: 'red ',
       //   color: 'white'
       // }
+
+      buttonStyles.push(styles.red)
     }
 
     const articleStyles = [];
@@ -111,9 +101,9 @@ class App extends Component {
 
     return ( //zwraca jsx nie html
       <div className="App">
-     <StyledButton altButton={this.state.showArticles}
+     <button className={buttonStyles.join(' ')}
        onClick={this.toggleArticlesHandler}>Toggle Articles
-      </StyledButton>
+      </button>
         <div className={articleStyles.join(' ')}>
           {articles}
         </div>
