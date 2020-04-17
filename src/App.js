@@ -1,8 +1,8 @@
 import React, { Component } from 'react'; //zaciagamy główną klase reactową którą będziemy rozszerzac
 import './App.css'
 import Article from './Article/Article'
-import article from './Article/Article';
-import Radium, {StyleRoot} from 'radium';
+
+
 
 class App extends Component {
   state = {
@@ -93,16 +93,16 @@ class App extends Component {
 
 
     return ( //zwraca jsx nie html
-      <StyleRoot>
+     
       <div className="App">
         <button style={buttonStyle} onClick={this.toggleArticlesHandler}>Toggle Articles</button>
         <div className={articleStyles.join(' ')}>
           {articles}
         </div>
       </div>
-      </StyleRoot>
+     
     );
   }
 }
 
-export default Radium(App); //jeżeli będziesz importować ten plik to będziesz importować te klasę
+export default App; //jeżeli będziesz importować ten plik to będziesz importować te klasę
