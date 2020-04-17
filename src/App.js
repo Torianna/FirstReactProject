@@ -1,7 +1,24 @@
 import React, { Component } from 'react'; //zaciagamy główną klase reactową którą będziemy rozszerzac
-import './App.css'
-import Article from './Article/Article'
+import './App.css';
+import Article from './Article/Article';
+import styled from 'styled-components';
 
+//styled components - normalny css
+const StyledButton = styled.button`
+background-color: white;
+border: ${props=> props.altButton ? '2px solid red' : '2px solid #326647'}; //warunek w styled divie, który przekazujemy przez propsy
+color: black;
+padding: 10px 16px;
+text-align: center;
+font-size: 20px;
+cursor: pointer;
+margin-top: 10px;
+margin-bottom: 10px;
+transitionDuration: 0.4s;
+&:hover{
+  background-color: ${props => props.altButton ? 'red' : '#326647' };
+  color: white;
+}`
 
 
 class App extends Component {
@@ -37,23 +54,23 @@ class App extends Component {
   render() //obligatoryjna funkcja
   {
 
-    //inline styles 
-    const buttonStyle = {
-      backgroundColor: 'white',
-      border: '2px solid #326647',
-      color: 'black',
-      padding: '10px 16px',
-      textAlign: 'center',
-      fontSize: '20px',
-      cursor: 'pointer',
-      marginTop: '10px',
-      marginBottom: '10px',
-      transitionDuration: '0.4s',
-      ':hover':{
-        backgroundColor: '#326647 ',
-        color: 'white'
-      }
-    };
+    // //inline styles 
+    // const buttonStyle = {
+    //   backgroundColor: 'white',
+    //   border: '2px solid #326647',
+    //   color: 'black',
+    //   padding: '10px 16px',
+    //   textAlign: 'center',
+    //   fontSize: '20px',
+    //   cursor: 'pointer',
+    //   marginTop: '10px',
+    //   marginBottom: '10px',
+    //   transitionDuration: '0.4s',
+    //   ':hover':{
+    //     backgroundColor: '#326647 ',
+    //     color: 'white'
+    //   }
+    // };
 
 
 
@@ -69,13 +86,13 @@ class App extends Component {
         />);
       });
 
-      buttonStyle.border = '2px solid red';
-      buttonStyle.transitionDuration = '0.4s';
-      buttonStyle[":hover"] = 
-      {
-        backgroundColor: 'red ',
-        color: 'white'
-      }
+      // buttonStyle.border = '2px solid red';
+      // buttonStyle.transitionDuration = '0.4s';
+      // buttonStyle[":hover"] = 
+      // {
+      //   backgroundColor: 'red ',
+      //   color: 'white'
+      // }
     }
 
     const articleStyles = [];
@@ -93,14 +110,14 @@ class App extends Component {
 
 
     return ( //zwraca jsx nie html
-     
       <div className="App">
-        <button style={buttonStyle} onClick={this.toggleArticlesHandler}>Toggle Articles</button>
+     <StyledButton altButton={this.state.showArticles}
+       onClick={this.toggleArticlesHandler}>Toggle Articles
+      </StyledButton>
         <div className={articleStyles.join(' ')}>
           {articles}
         </div>
       </div>
-     
     );
   }
 }
