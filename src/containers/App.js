@@ -1,119 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
-import Articles from '../components/Articles/Articles';
-import Header from '../components/Header/Header';
-import Links from '../components/Links/Links';
-
-
+import Employees from '../components/Employees/Employees'
+import axios from 'axios';
 
 class App extends Component {
 
   state= {
-    articles: [
-      { id: 'asdad213', title: "title1", content: "This is content 1" },
-      { id: 'asqwecz13', title: "title2", content: "This is content 2" },
-      { id: 'czxve', title: "title3", content: "This is content 3" },
-      { id: 'aczbdd', title: "title4", content: "This is content 4" }
-    ],
-    showArticles: false,
-    showSeconds: false,
-    counter: 0
+    employees:[
+      {name:'E1'},
+      {name:'E2'},
+      {name:'E3'}
+  ]
   }
 
-  toggleSecondHandler = () =>
-  {
-    const areSecondsVisible= this.state.showSeconds;
-    this.setState({showSeconds: !areSecondsVisible});
-  }
-
-  constructor(props)
-  {
-    console.log("constructor");
-    //musimy ją wywołać ponieważ ona wywołuje konstruktor klasy którą extendujemy
-    super(props);
-    //kontruktor musi być zawsze gdy przy tworzeniu komponent musimy ustawić jakiś state (wartość początkową)
-    
-    
-  }
-
-  static getDerivedStateFromProps(props, state)
-  {
-    console.log(" App getDerivedStateFromProps");
-    //zwracam zaktualizowany stan
-    //możliwość edycji state gdy zmieniają się propsy 
-    return state;
-  }
-
-  //ostatnia metoda życia komponentu 
   componentDidMount()
   {
-    console.log("App componentDidMount");
-    //puszczanie zapytan http np.
-    //nie wolno aktualizować state synchronicznie
-    //tylko asynchroniczne
-    //czyli np zwrócone dane z serwera
-  }
-  componentDidUpdate(){
-    console.log("App componentDidUpdate");
-  }
-
-  shouldComponentUpdate(nextProps, nextState)
-  {
-    console.log("App shouldComponentUpdate");
-    return true;
-  }
-
- 
-
-  toggleArticlesHandler = () => {
-    const doesShow = this.state.showArticles;
-    this.setState({ showArticles: !doesShow });
+    //wykonuje sie asynchronicznie więc trzeba inaczej obłużyc
+    //nie mozna const emplyees =
+    //trzeba poczekać na odpowiedź, więc:
+      axios.get('http://dummy.restapiexample.com/api/v1/employees',null).then(
+        (response) =>
+        {
+          console.log(response);
+        }
+      );
+      
 
   }
 
-  deleteArticleHandler = (articleIndex) => {
-    const articles = [...this.state.articles];
-    articles.splice(articleIndex, 1);
-    this.setState({ articles: articles });
-  }
 
-  countHandler = () =>
-  {
-    let i;
-    for(i=0; i<20;i++)
-    {
-      //setState asynchronicznie zamiast this.setState({counter...}) to:
-      this.setState((prevState,props) => ({counter: prevState.counter+1}));
-    }
-  }
-
-  render() {
-    console.log("App render");
-    //zmiana state odbywa się dopiero po renderowaniu widoku 
-    console.log(this.state.counter);
-
-    let articles = null;
-    if(this.state.showArticles){
-      articles = <Articles articles={this.state.articles} deleteArticle={this.deleteArticleHandler} />
-    }
-
-    let seconds = null;
-
-    if(this.state.showSeconds){
-      const now = new Date();
-      seconds = <h1>{now.getSeconds()}</h1>
-    }
+  render(){
 
     return (
-      
-     
+    
       <div className='App'>
-         <button onClick={this.countHandler}>Count</button><br/>
-         <button onClick={this.toggleSecondHandler}>Toggle Seconds</button>
-      {seconds}
-        <Header showArticles={this.state.showArticles} toggleArticles={this.toggleArticlesHandler} year={1960}/>
-        {articles}
-        <Links/>
+        <h1>Employees</h1>
+        <Employees employees={this.state.employees}/>
       </div>
      
 
