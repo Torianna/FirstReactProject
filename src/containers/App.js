@@ -111,7 +111,7 @@ class App extends Component {
          <button onClick={this.countHandler}>Count</button><br/>
          <button onClick={this.toggleSecondHandler}>Toggle Seconds</button>
       {seconds}
-        <Header showArticles={this.state.showArticles} toggleArticles={this.toggleArticlesHandler} />
+        <Header showArticles={this.state.showArticles} toggleArticles={this.toggleArticlesHandler} year={1960}/>
         {articles}
         <Links/>
       </div>
