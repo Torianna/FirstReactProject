@@ -83,10 +83,8 @@ class App extends Component {
     for(i=0; i<20;i++)
     {
       //setState asynchronicznie zamiast this.setState({counter...}) to:
-      this.setState((prevState,props) => {counter: prevState.counter+1});
+      this.setState((prevState,props) => ({counter: prevState.counter+1}));
     }
-
-    
   }
 
   render() {
