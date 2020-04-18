@@ -1,11 +1,11 @@
 import React from 'react';
 import './Article.css';
-import styled from 'styled-components';
 import styles from './Article.module.css';
 
 
 const article = (props) =>
 {
+    console.log("articles");
 
     const style={
         '@media (min-width: 900px)':{

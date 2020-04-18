@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'; //importuje klasę App z pliku ./App
+import App from './containers/App'; //importuje klasę App z pliku ./App
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
