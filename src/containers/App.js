@@ -16,7 +16,8 @@ class App extends Component {
       { id: 'aczbdd', title: "title4", content: "This is content 4" }
     ],
     showArticles: false,
-    showSeconds: false
+    showSeconds: false,
+    counter: 0
   }
 
   toggleSecondHandler = () =>
@@ -76,9 +77,22 @@ class App extends Component {
     this.setState({ articles: articles });
   }
 
+  countHandler = () =>
+  {
+    let i;
+    for(i=0; i<20;i++)
+    {
+      //setState asynchronicznie zamiast this.setState({counter...}) to:
+      this.setState((prevState,props) => {counter: prevState.counter+1});
+    }
+
+    
+  }
 
   render() {
     console.log("App render");
+    //zmiana state odbywa się dopiero po renderowaniu widoku 
+    console.log(this.state.counter);
 
     let articles = null;
     if(this.state.showArticles){
@@ -96,6 +110,7 @@ class App extends Component {
       
      
       <div className='App'>
+         <button onClick={this.countHandler}>Count</button><br/>
          <button onClick={this.toggleSecondHandler}>Toggle Seconds</button>
       {seconds}
         <Header showArticles={this.state.showArticles} toggleArticles={this.toggleArticlesHandler} />
