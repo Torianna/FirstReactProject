@@ -1,20 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Header.module.css';
 
-const header = (props) =>
+const Header = (props) =>
 {
+  //przyjmuje funkcje ktora jest wywolywana po każdym renderowaniu komponentu
+    useEffect(()=>
+    { // musimy zmienić na dużą literę komponent funkcyjny
+      console.log("Header useEffect");
+    });
+
     const buttonStyles=[styles.toggleButton];
 
     
     if (props.showArticles) {
-        // buttonStyle.border = '2px solid red';
-        // buttonStyle.transitionDuration = '0.4s';
-        // buttonStyle[":hover"] = 
-        // {
-        //   backgroundColor: 'red ',
-        //   color: 'white'
-        // }
-  
+    
         buttonStyles.push(styles.red)
       }
   
@@ -28,4 +27,5 @@ const header = (props) =>
       </div>
     );
 }
-export default header;
+//użycie memo do optymalizacji, memo utrzymuje stan komponentu
+export default React.memo(Header);

@@ -10,6 +10,23 @@ import Header from '../components/Header/Header'
 
 class App extends Component {
 
+  state= {
+    articles: [
+      { id: 'asdad213', title: "title1", content: "This is content 1" },
+      { id: 'asqwecz13', title: "title2", content: "This is content 2" },
+      { id: 'czxve', title: "title3", content: "This is content 3" },
+      { id: 'aczbdd', title: "title4", content: "This is content 4" }
+    ],
+    showArticles: false,
+    showSeconds: false
+  }
+
+  toggleSecondHandler = () =>
+  {
+    const areSecondsVisible= this.state.showSeconds;
+    this.setState({showSeconds: !areSecondsVisible});
+  }
+
   constructor(props)
   {
     console.log("constructor");
@@ -22,7 +39,7 @@ class App extends Component {
 
   static getDerivedStateFromProps(props, state)
   {
-    console.log("getDerivedStateFromProps");
+    console.log(" App getDerivedStateFromProps");
     //zwracam zaktualizowany stan
     //możliwość edycji state gdy zmieniają się propsy 
     return state;
@@ -31,22 +48,23 @@ class App extends Component {
   //ostatnia metoda życia komponentu 
   componentDidMount()
   {
-    console.log("componentDidMount");
+    console.log("App componentDidMount");
     //puszczanie zapytan http np.
     //nie wolno aktualizować state synchronicznie
     //tylko asynchroniczne
     //czyli np zwrócone dane z serwera
   }
-
-  state= {
-    articles: [
-      { id: 'asdad213', title: "title1", content: "This is content 1" },
-      { id: 'asqwecz13', title: "title2", content: "This is content 2" },
-      { id: 'czxve', title: "title3", content: "This is content 3" },
-      { id: 'aczbdd', title: "title4", content: "This is content 4" }
-    ],
-    showArticles: false
+  componentDidUpdate(){
+    console.log("App componentDidUpdate");
   }
+
+  shouldComponentUpdate(nextProps, nextState)
+  {
+    console.log("App shouldComponentUpdate");
+    return true;
+  }
+
+ 
 
   toggleArticlesHandler = () => {
     const doesShow = this.state.showArticles;
@@ -62,19 +80,30 @@ class App extends Component {
 
 
   render() {
-    console.log("render");
+    console.log("App render");
 
     let articles = null;
     if(this.state.showArticles){
       articles = <Articles articles={this.state.articles} deleteArticle={this.deleteArticleHandler} />
     }
 
-    return (
+    let seconds = null;
 
+    if(this.state.showSeconds){
+      const now = new Date();
+      seconds = <h1>{now.getSeconds()}</h1>
+    }
+
+    return (
+      
+     
       <div className='App'>
+         <button onClick={this.toggleSecondHandler}>Toggle Seconds</button>
+      {seconds}
         <Header showArticles={this.state.showArticles} toggleArticles={this.toggleArticlesHandler} />
         {articles}
       </div>
+     
 
     );
   }
