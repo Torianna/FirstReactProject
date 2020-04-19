@@ -7,9 +7,7 @@ class App extends Component {
 
   state= {
     employees:[
-      {name:'E1'},
-      {name:'E2'},
-      {name:'E3'}
+   
   ]
   }
 
@@ -22,6 +20,8 @@ class App extends Component {
         (response) =>
         {
           console.log(response);
+          const employees = response.data.data;
+          this.setState({employees:employees});
         }
       );
       
