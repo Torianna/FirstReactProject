@@ -81,3 +81,9 @@
 .GreenArticles{
   color: #326647;
 }
+
+.UpdateButton
+{
+  margin: auto;
+  margin-bottom: 10px;
+}
